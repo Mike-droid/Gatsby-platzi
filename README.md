@@ -1,97 +1,112 @@
-<!-- AUTO-GENERATED-CONTENT:START (STARTER) -->
-<p align="center">
-  <a href="https://www.gatsbyjs.org">
-    <img alt="Gatsby" src="https://www.gatsbyjs.org/monogram.svg" width="60" />
-  </a>
-</p>
-<h1 align="center">
-  Gatsby's default starter
-</h1>
+# Curso de Desarrollo de Aplicaciones Web con Gatsby JS
 
-Kick off your project with this default boilerplate. This starter ships with the main Gatsby configuration files you might need to get up and running blazing fast with the blazing fast app generator for React.
+## Introducción a Gatsby
 
-_Have another more specific idea? You may want to check out our vibrant collection of [official and community-created starters](https://www.gatsbyjs.org/docs/gatsby-starters/)._
+### ¿Qué es Gatsby?
 
-## 🚀 Quick start
+- Framework
+- Abierto y gratuito
+- Comunidad increíble
+- Apuesta a un stack innovador
+- Increíblemente rápido en desarrollo y producción
 
-1.  **Create a Gatsby site.**
+¿Cómo funciona? Gatsby recolecta la información previamente. Funciona como un sistema SSR. Trae la información de distintas fuents, como una Base de datos, un CMS o un sistema de archivos. Con esto crea vistas con React y GraphQL. Crea un sitio estático.
 
-    Use the Gatsby CLI to create a new site, specifying the default starter.
+[Página oficial de Gatsby](https://www.gatsbyjs.com/)
 
-    ```sh
-    # create a new Gatsby site using the default starter
-    gatsby new my-default-starter https://github.com/gatsbyjs/gatsby-starter-default
-    ```
+[micro-frontends with Gatsby](https://www.youtube.com/watch?v=0Ta-awtLZTs)
 
-1.  **Start developing.**
+### ¿Por qué Gatsby? Seguridad y Velocidad
 
-    Navigate into your new site’s directory and start it up.
+Cuando vamos a hacer un proyecto debemos tomar la decisión de qué framework usar. Por ejemplo escogemos entre Vue y React. La ventaja es que nos crean una SPA, con la desventaja de que es 1 archivo HTML y múltiples archivos JS.
 
-    ```sh
-    cd my-default-starter/
-    gatsby develop
-    ```
+Herrmientas de SSR:
 
-1.  **Open the source code and start editing!**
+- Nuxt (para Vue)
+- Next.js (para React)
 
-    Your site is now running at `http://localhost:8000`!
+Gatsby se construye en el servidor apoyándose de NodeJS y de Webpack. También usa los plugins para obtener información de diversas fuentes.
 
-    _Note: You'll also see a second link: _`http://localhost:8000/___graphql`_. This is a tool you can use to experiment with querying your data. Learn more about using this tool in the [Gatsby tutorial](https://www.gatsbyjs.org/tutorial/part-five/#introducing-graphiql)._
+Gatsby usa:
 
-    Open the `my-default-starter` directory in your code editor of choice and edit `src/pages/index.js`. Save your changes and the browser will update in real time!
+- Virtual DOM
+- Componentes
+- Hot Reloading
+- Code Splitting e imágenes responsivas
 
-## 🧐 What's inside?
+Ya que Gatsby hace un sitio estático es muy fácil hacer el despliegue.
 
-A quick look at the top-level files and directories you'll see in a Gatsby project.
+### Diferencias entre SPA, SSR y Gatsby
 
-    .
-    ├── node_modules
-    ├── src
-    ├── .gitignore
-    ├── .prettierrc
-    ├── gatsby-browser.js
-    ├── gatsby-config.js
-    ├── gatsby-node.js
-    ├── gatsby-ssr.js
-    ├── LICENSE
-    ├── package-lock.json
-    ├── package.json
-    └── README.md
+[Artículo en Platzi](https://platzi.com/clases/1618-gatsby/21373-diferencias-entre-spa-ssr-y-gatsby/)
 
-1.  **`/node_modules`**: This directory contains all of the modules of code that your project depends on (npm packages) are automatically installed.
+## Preparando el entorno
 
-2.  **`/src`**: This directory will contain all of the code related to what you will see on the front-end of your site (what you see in the browser) such as your site header or a page template. `src` is a convention for “source code”.
+### Requisitos previos
 
-3.  **`.gitignore`**: This file tells git which files it should not track / not maintain a version history for.
+Tienes que conocer sobre Node, NPM, React y GraphQL.
 
-4.  **`.prettierrc`**: This is a configuration file for [Prettier](https://prettier.io/). Prettier is a tool to help keep the formatting of your code consistent.
+- [Node.js Ultimate Beginner's Guide in 7 Easy Steps](https://www.youtube.com/watch?v=ENrzD9HAZK4)
+- [React in 100 Seconds](https://www.youtube.com/watch?v=Tn6-PIqc4UM)
+- [GraphQL Explained in 100 seconds](https://www.youtube.com/watch?v=eIQh02xuVw4)
 
-5.  **`gatsby-browser.js`**: This file is where Gatsby expects to find any usage of the [Gatsby browser APIs](https://www.gatsbyjs.org/docs/browser-apis/) (if any). These allow customization/extension of default Gatsby settings affecting the browser.
+Es muy recomendado tener Prettier y ESLint, además de los snippets de React.
 
-6.  **`gatsby-config.js`**: This is the main configuration file for a Gatsby site. This is where you can specify information about your site (metadata) like the site title and description, which Gatsby plugins you’d like to include, etc. (Check out the [config docs](https://www.gatsbyjs.org/docs/gatsby-config/) for more detail).
+### Gatsby y Gatsby CLI y Starters
 
-7.  **`gatsby-node.js`**: This file is where Gatsby expects to find any usage of the [Gatsby Node APIs](https://www.gatsbyjs.org/docs/node-apis/) (if any). These allow customization/extension of default Gatsby settings affecting pieces of the site build process.
+Hay que instalar `npm install -g gatsby-cli`
 
-8.  **`gatsby-ssr.js`**: This file is where Gatsby expects to find any usage of the [Gatsby server-side rendering APIs](https://www.gatsbyjs.org/docs/ssr-apis/) (if any). These allow customization of default Gatsby settings affecting server-side rendering.
+Las 3 dependencias básicas de un proyecto en Gatbsy: `npm i react react-dom gatsby`
 
-9.  **`LICENSE`**: Gatsby is licensed under the MIT license.
+Usamos `gatsby develop`
 
-10. **`package-lock.json`** (See `package.json` below, first). This is an automatically generated file based on the exact versions of your npm dependencies that were installed for your project. **(You won’t change this file directly).**
+Ahora con el CLI de Gatsby podemos crear un proyecto `gatsby new projectName`
 
-11. **`package.json`**: A manifest file for Node.js projects, which includes things like metadata (the project’s name, author, etc). This manifest is how npm knows which packages to install for your project.
+Podemos crear proyectos que ya existen, por ejemplo tenemos 2 platillas (de las muchas que hay):
 
-12. **`README.md`**: A text file containing useful reference information about your project.
+- `gatsby new gatsbycliproject`
+- `gatsby new gatsbyjs/gatsby-starter-blog`
 
-## 🎓 Learning Gatsby
+### Configuración de ESLint
 
-Looking for more guidance? Full documentation for Gatsby lives [on the website](https://www.gatsbyjs.org/). Here are some places to start:
+[Artículo en Platzi](https://platzi.com/clases/1618-gatsby/20983-configuracion-de-eslint/)
 
-- **For most developers, we recommend starting with our [in-depth tutorial for creating a site with Gatsby](https://www.gatsbyjs.org/tutorial/).** It starts with zero assumptions about your level of ability and walks through every step of the process.
+## Fundamentos de Gatsby
 
-- **To dive straight into code samples, head [to our documentation](https://www.gatsbyjs.org/docs/).** In particular, check out the _Guides_, _API Reference_, and _Advanced Tutorials_ sections in the sidebar.
+### Presentación y Estructura de Archivos de nuestro proyecto: Platziswag
 
-## 💫 Deploy
+Clonamos `git clone https://github.com/Jossdz/Gatsby-platzi`
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/gatsbyjs/gatsby-starter-default)
+Si da error al hacer `npm i`:
 
-<!-- AUTO-GENERATED-CONTENT:END -->
+- Hacemos `npm update`
+- Luego `npm i --unsafe-perm`
+
+---
+
+- En el archivo 'gatsby-config.js' tenemos toda la configuración de nuestro proyecto.
+- En el archivo 'gatsby-browser.js' es la configuración del lado del cliente y también podemos hacer llamadas a APIs.
+- En el archivo 'gatsby-node.js' tenemos las piezas de construcción. Aquí usamos GraphQL.
+- En el archivo 'gatsby-ssr.js' es muy similiar al gatsby-browser.js, pero es para el servidor.
+
+### Ecosistema de plugins
+
+Los plugins son herramientas o paquetes de código que nos van a ayudar en nuestro proyecto. Son como las dependencias de NPM.
+
+Tenemos 3 tipos de plugins:
+
+1. Componentes
+2. Funcionalad
+3. Fuente de datos
+
+Gatsby tiene un plugin para de fuente de datos: `resolve: gatsby-source-filesystem`,
+
+Documentación para algunos plugins:
+
+- [gatsby-plugin-react-helmet](https://www.gatsbyjs.com/docs/add-page-metadata/#using-react-helmet-and-gatsby-plugin-react-helmet)
+- [gatsby-transformer-sharp](https://www.gatsbyjs.com/docs/reference/built-in-components/gatsby-image/#common-fragments-with-gatsby-transformer-sharp)
+- [gatsby-plugin-sharp](https://www.gatsbyjs.com/docs/how-to/local-development/gatsby-on-windows/#gatsby-plugin-sharp-requires-node-x64)
+- [gatsby-source-filesystem](https://www.gatsbyjs.com/docs/how-to/sourcing-data/sourcing-from-the-filesystem/#using-gatsby-source-filesystem)
+- [gatsby-plugin-manifest](https://www.gatsbyjs.com/docs/how-to/performance/add-a-manifest-file/#using-gatsby-plugin-manifest)
+
+### Usando React para manejar la parte visual e interactiva de nuestra aplicación
