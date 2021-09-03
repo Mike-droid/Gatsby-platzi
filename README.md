@@ -129,3 +129,222 @@ exports.wrapRootElement = ({element}) => ( <Layout> {element} </Layout> )
 ```
 
 [Documentación de Wrap Root Element](https://www.gatsbyjs.com/docs/reference/config-files/gatsby-browser/#wrapRootElement)
+
+## Graphql en Gatsby
+
+### ¿Cómo funciona GraphQL en Gatsby?
+
+GraphQL es un lenguaje tipado que nos ayuda a comunicar servicios. No importa cual sea la fuente de datos, podemos recolectar la información.
+Todo el flujo sucede solamente en 'desarrollo'. La información se recolecta previamente en este proceso.
+
+### Accediendo a nuestros datos en Gatsby desde GraphQL
+
+Cuando hacemos `gatsby develop` tenemos acceso a `http://localhost:8000/___graphql` donde tenemos una herramienta para hacer queries.
+
+❗ Importante: NO debemos ni siquiera warnings porque GraphlQL no funcionará.
+
+```graphql
+query TodasLasFotos{
+  allFile{
+    totalCount
+  }
+}
+```
+
+En este caso, esta query nos regresa:
+
+```json
+{
+  "data": {
+    "allFile": {
+      "totalCount": 11
+    }
+  },
+  "extensions": {}
+}
+```
+
+### Queries, Edges (conexiones) y Nodos en Gatsby
+
+Podemos pedir información más específica de nuestras imágenes, pero es necesario que primero entremos a los Edges (que son las conexiones con los plugins) y luego a los Nodos.
+
+```graphql
+query TodasLasFotos{
+  allFile{
+    totalCount
+    edges{
+      node{
+        name
+        relativePath
+        size
+      }
+    }
+  }
+}
+```
+
+Este query nos regresa:
+
+```json
+{
+  "data": {
+    "allFile": {
+      "totalCount": 11,
+      "edges": [
+        {
+          "node": {
+            "name": "Logo",
+            "relativePath": "Logo.png",
+            "size": 6321
+          }
+        },
+        {
+          "node": {
+            "name": "cart",
+            "relativePath": "cart.png",
+            "size": 515
+          }
+        },
+        {
+          "node": {
+            "name": "gatsby-icon",
+            "relativePath": "gatsby-icon.png",
+            "size": 21212
+          }
+        },
+        {
+          "node": {
+            "name": "stickers1",
+            "relativePath": "stickers1.png",
+            "size": 44827
+          }
+        },
+        {
+          "node": {
+            "name": "camiseta",
+            "relativePath": "camiseta.png",
+            "size": 97101
+          }
+        },
+        {
+          "node": {
+            "name": "hoodie",
+            "relativePath": "hoodie.png",
+            "size": 83826
+          }
+        },
+        {
+          "node": {
+            "name": "icon",
+            "relativePath": "icon.png",
+            "size": 126350
+          }
+        },
+        {
+          "node": {
+            "name": "pin",
+            "relativePath": "pin.png",
+            "size": 71111
+          }
+        },
+        {
+          "node": {
+            "name": "mug",
+            "relativePath": "mug.png",
+            "size": 56485
+          }
+        },
+        {
+          "node": {
+            "name": "gatsby-astronaut",
+            "relativePath": "gatsby-astronaut.png",
+            "size": 167273
+          }
+        },
+        {
+          "node": {
+            "name": "stickers2",
+            "relativePath": "stickers2.png",
+            "size": 110158
+          }
+        }
+      ]
+    }
+  },
+  "extensions": {}
+}
+```
+
+### Consultas en GraphQL desde React
+
+Los queries solamente se pueden ejecutar dentro de los archivos que están en la carpeta de 'pages' y tienen que ser exportados.
+
+Vamos a conseguir esta información:
+
+```javascript
+siteMetadata: {
+  title: `Platziswag`,
+  description: `El mejor swag de Platzi disponible para ti`,
+  author: `@MiguelAngelRe28`,
+},
+```
+
+En index.js dentro de  'pages':
+
+```jsx
+import React from "react"
+import { Link, graphql } from "gatsby"
+import { Jumbo } from '../components/'
+import { SEO } from "../components"
+
+export const query = graphql`
+  query GET_DESCRIPTION{
+  allSite{
+    edges{
+      node{
+        siteMetadata{
+          description
+        }
+      }
+    }
+  }
+}
+`
+
+const IndexPage = ({data}) => (
+  <>
+    <SEO title="Home" />
+    <Jumbo description={data.allSite.edges[0].node.siteMetadata.description}/>
+    <h1>Hi people</h1>
+    <p>Welcome to your new Gatsby site.</p>
+    <p>Now go build something great.</p>
+    <Link to="/gracias">Go to gracias</Link>
+  </>
+)
+
+export default IndexPage
+
+```
+
+Y en Jumbo.js dentro de 'components':
+
+```jsx
+import React from 'react'
+import {StyledJumbo} from '../styles/components'
+
+export default function Jumbo({description}) {
+  return (
+    <StyledJumbo>
+      <div>
+        <h2>¡Consigue el mejor swag exclusivo y especial de Platzi!</h2>
+        <small>{description}</small>
+      </div>
+    </StyledJumbo>
+  )
+}
+
+```
+
+Y lo veremos reflejado en la página web.
+
+❗ Importante, NO deberías tener más constantes con el nombre de 'query' porque Gatsby busca esta constante para hacer las consultas.
