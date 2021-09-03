@@ -110,3 +110,22 @@ Documentación para algunos plugins:
 - [gatsby-plugin-manifest](https://www.gatsbyjs.com/docs/how-to/performance/add-a-manifest-file/#using-gatsby-plugin-manifest)
 
 ### Usando React para manejar la parte visual e interactiva de nuestra aplicación
+
+## Creando la vista con React
+
+### Router en Gatsby y Componente Link
+
+Creamos los links de la página en la carpeta de 'pages', siendo archivos de JS.
+
+### Layout en Gatsby
+
+Encerramos todas las pages de nuestra página con algo muy sencillo, en el archivo gatsby-browser.js:
+
+```javascript
+const React = require('react')
+const Layout = require('./src/components/layout').default
+
+exports.wrapRootElement = ({element}) => ( <Layout> {element} </Layout> )
+```
+
+[Documentación de Wrap Root Element](https://www.gatsbyjs.com/docs/reference/config-files/gatsby-browser/#wrapRootElement)
