@@ -348,3 +348,287 @@ export default function Jumbo({description}) {
 Y lo veremos reflejado en la página web.
 
 ❗ Importante, NO deberías tener más constantes con el nombre de 'query' porque Gatsby busca esta constante para hacer las consultas.
+
+## Usando plugins en Gatsby
+
+### Instalación y configuración de plugins
+
+Usaremos el plugin de [typography](https://www.gatsbyjs.com/plugins/gatsby-plugin-typography/?=typography). Nos ayudará a llevar distintas fuentes a nuestro sitio sin necesidad de CSS. Los plugins son módulos de NPM.
+
+Instalamos typography con `npm install gatsby-plugin-typography react-typography typography`
+
+Luego lo agregamos al archivo 'gatsby-config.js':
+
+```javascript
+plugins:[
+  {
+    resolve: `gatsby-plugin-typography`,
+    options: {
+      pathToConfigModule: 'src/utils/typography.js', //Creamos este archivo
+    }
+  }
+]
+```
+
+Y el archivo de typography.js:
+
+```javascript
+import Typography from "typography";
+
+const typography = new Typography({
+  baseFontSize: "18px",
+  baseLineHeight: 1.666,
+  headerFontFamily: [
+    'Lato',
+    'Helvetica Neue',
+    'Arial'
+  ],
+  bodyFontFamily: [
+    'Open Sans',
+    'Roboto',
+    'Georgia'
+  ],
+});
+
+export default typography;
+```
+
+### Imágenes como fuente de datos
+
+[Working with Images in Gatsby](https://www.gatsbyjs.com/docs/working-with-images/)
+
+Si usamos GraphQL con este query:
+
+```graphql
+{
+  allFile{
+    edges{
+      node{
+        id
+        relativePath
+        prettySize
+        publicURL
+      }
+    }
+  }
+}
+```
+
+Obtendremos este resultado:
+
+```json
+{
+  "data": {
+    "allFile": {
+      "edges": [
+        {
+          "node": {
+            "id": "c50f901b-53a0-5f6b-8f04-03f9f33226df",
+            "relativePath": "Logo.png",
+            "prettySize": "6.32 kB",
+            "publicURL": "/static/3a035444978974a51ae8287cb2ff29f3/Logo.png"
+          }
+        },
+        {
+          "node": {
+            "id": "d4447f6e-526b-52a1-859c-43b2e998fc6f",
+            "relativePath": "cart.png",
+            "prettySize": "515 B",
+            "publicURL": "/static/92420c0eceec769bc40ef134a2fcfdcf/cart.png"
+          }
+        },
+        {
+          "node": {
+            "id": "056b5e8a-6037-5d04-ab2d-66cc9398b29f",
+            "relativePath": "gatsby-icon.png",
+            "prettySize": "21.2 kB",
+            "publicURL": "/static/4a9773549091c227cd2eb82ccd9c5e3a/gatsby-icon.png"
+          }
+        },
+        {
+          "node": {
+            "id": "0a25e8ac-9c62-5144-8f94-f803206f686e",
+            "relativePath": "mug.png",
+            "prettySize": "56.5 kB",
+            "publicURL": "/static/dee1beb3e04c46ffe81e08f73e3e4633/mug.png"
+          }
+        },
+        {
+          "node": {
+            "id": "bea94ad1-92a7-5ab0-b1fb-ef0f0c80114e",
+            "relativePath": "stickers1.png",
+            "prettySize": "44.8 kB",
+            "publicURL": "/static/3ed3194a818a11c32a80aa72b0ebe480/stickers1.png"
+          }
+        },
+        {
+          "node": {
+            "id": "f9ccd07b-d131-54a7-90da-5b269c28e511",
+            "relativePath": "camiseta.png",
+            "prettySize": "97.1 kB",
+            "publicURL": "/static/d442a8b550c7b907319f1107980f3c59/camiseta.png"
+          }
+        },
+        {
+          "node": {
+            "id": "6fc38d8c-5d39-5088-8f4e-dccf699c3e43",
+            "relativePath": "hoodie.png",
+            "prettySize": "83.8 kB",
+            "publicURL": "/static/49b11cd38984eeb59ed83e35872bedcb/hoodie.png"
+          }
+        },
+        {
+          "node": {
+            "id": "6fc3aabd-b0db-5725-8b0c-8cf14b3a4dd1",
+            "relativePath": "icon.png",
+            "prettySize": "126 kB",
+            "publicURL": "/static/fc299bb0dde2432db7f768171b09d328/icon.png"
+          }
+        },
+        {
+          "node": {
+            "id": "2e44d622-9eec-5091-b26a-5b358689aa0f",
+            "relativePath": "pin.png",
+            "prettySize": "71.1 kB",
+            "publicURL": "/static/43c2d2ed4ca064ce21c4b53ff37fb57a/pin.png"
+          }
+        },
+        {
+          "node": {
+            "id": "07583d9f-5c0b-5ab2-97dd-ddd3b7fa6bb6",
+            "relativePath": "stickers2.png",
+            "prettySize": "110 kB",
+            "publicURL": "/static/25f529332fa038fc71b6c83fd9d7a4cb/stickers2.png"
+          }
+        },
+        {
+          "node": {
+            "id": "993b466a-67ad-5dd4-a9c9-023fe6e0ac6a",
+            "relativePath": "gatsby-astronaut.png",
+            "prettySize": "167 kB",
+            "publicURL": "/static/6d91c86c0fde632ba4cd01062fd9ccfa/gatsby-astronaut.png"
+          }
+        }
+      ]
+    }
+  },
+  "extensions": {}
+}
+```
+
+### Plugins de transformación
+
+El `gatsby-plugin-sharp` añade algo extra a nuestro query de GraphQL:
+
+```GraphQL
+query GET_IMAGE {
+  logo: file(relativePath: {eq: "Logo.png"}){
+    childImageSharp{
+      fluid(maxWidth: 1000){
+        src
+        srcWebp
+      }
+    }
+  }
+}
+```
+
+Creamos image.js:
+
+```javascript
+import React from 'react'
+import { graphql, StaticQuery } from 'gatsby'
+import Img from 'gatsby-image'
+
+export default function Image({name}) {
+  return (
+    <StaticQuery
+      query={graphql`
+        query GET_IMAGE {
+            icon: file(relativePath: {eq: "icon.png"}){
+              childImageSharp{
+                fluid(maxWidth: 1000){
+                  ...GatsbyImageSharpFluid
+                }
+              }
+            }
+          }
+      `}
+      render={data => <Img fluid={data[name].childImageSharp.fluid} alt='icon' />}
+    />
+  )
+}
+
+```
+
+Y lo usamos en Jumbo.js:
+
+```javascript
+import React from 'react'
+import {StyledJumbo} from '../styles/components'
+import { Image } from './'
+
+export default function Jumbo({description}) {
+  return (
+    <StyledJumbo>
+      <div>
+        <h2>¡Consigue el mejor swag exclusivo y especial de Platzi!</h2>
+        <small>{description}</small>
+      </div>
+      <Image name='icon' />
+    </StyledJumbo>
+  )
+}
+
+```
+
+### Estilizando nuestros componentes con styled-components
+
+Los styled components son como una copia de elementos HTML, podemos escribir CSS dentro de JS.
+
+Podemos acceder a los props del componente desde JS:
+
+```javascript
+const Button = styled.button`
+  width: 8rem;
+  color: #fff;
+  background-color: #98ca3f;
+  border: none;
+  border-radius: 10px;
+  color: ${props => props.color};
+  &:hover {
+    transform: scale(1.4);
+    cursor: pointer;
+  }
+`
+
+const IndexPage = ({data}) => (
+  <>
+    <SEO title="Home" />
+    <Jumbo description={data.allSite.edges[0].node.siteMetadata.description}/>
+    <Button color='gray'> Comprar </Button> {/* seleccionamos el nombre del color */}
+    <Link to="/gracias">Go to gracias</Link>
+  </>
+)
+```
+
+- [styled-components](https://styled-components.com/)
+- [styled-components en gatsby](https://www.gatsbyjs.com/docs/how-to/styling/styled-components/#reach-skip-nav)
+
+### Estilos Globales con styled-components
+
+Modificamos gatsby-browser.js:
+
+```javascript
+const React = require('react')
+const Layout = require('./src/components/layout').default
+const {GlobalStyles} = require('./src/styles')
+exports.wrapRootElement = ({element}) => (
+  <>
+    <GlobalStyles/>
+    <Layout> {element} </Layout>
+  </>
+)
+```
+
+Y ahora tenemos estilos globales. La ventada de styled components es que tenemos clases únicas en las etiquetas HTML y así no se pisan los estilos.

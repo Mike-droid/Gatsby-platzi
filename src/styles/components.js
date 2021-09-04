@@ -69,7 +69,7 @@ export const StyledJumbo = styled.div`
   margin-bottom: 5rem;
   overflow: hidden;
   position: relative;
-  
+
   div{
     padding: 1rem;
     width: 35vw;
@@ -322,7 +322,7 @@ export const MenuItem = styled.li`
     border-right: ${({ margin }) => (margin ? "1px solid white" : "")};
     padding: ${({ margin }) => (margin ? "0 26px 0 26px" : "0 0 0 26px")};
     & img{
-      margin-right: 5px; 
+      margin-right: 5px;
       width: 0.7rem;
     }
   `}

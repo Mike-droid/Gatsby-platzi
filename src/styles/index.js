@@ -24,12 +24,12 @@ export const GlobalStyles = createGlobalStyle`
     padding-top: 3.5rem;
   }
   ${above.medium`
-   main{
+    main{
       padding-top: calc(3.5rem - 100vh);
     }
     `}
   ${above.large`
-   main{
+    main{
       padding-top: calc(4.5rem - 100vh);
     }
   `}
