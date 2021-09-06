@@ -632,3 +632,193 @@ exports.wrapRootElement = ({element}) => (
 ```
 
 Y ahora tenemos estilos globales. La ventada de styled components es que tenemos clases únicas en las etiquetas HTML y así no se pisan los estilos.
+
+## Stripe checkout
+
+### Introducción a la API de Stripe Checkout
+
+[Stripe para México](https://stripe.com/mx)
+
+[Stripe checkout](https://stripe.com/docs/payments/checkout)
+
+Es necesario crear una cuenta.
+
+Como somos desarrolladores necesitamos usar la API de Stripe.
+
+Es necesario crear un archivo '.env.development' para guardar las credenciales que nos brinda stripe.
+
+### Agregando productos a nuestra tienda en línea
+
+Para usar Stripe desde nuestra aplicación con gatsby necesitamos instalar los siguientes plugins: `npm i gatsby-source-stripe gatsby-plugin-stripe`
+
+Como también usaremos las claves del archivo .env, necesitamos instalar `npm i dotenv`
+
+gatsby-config.js:
+
+```javascript
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`
+})
+
+module.exports = {
+  siteMetadata: {
+    title: `Platziswag`,
+    description: `El mejor swag de Platzi disponible para ti`,
+    author: `@MiguelAngelRe28`,
+  },
+  plugins: [
+    `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-stripe`,
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `images`,
+        path: `${__dirname}/src/images`,
+      },
+    },
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-sharp`,
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `gatsby-starter-default`,
+        short_name: `starter`,
+        start_url: `/`,
+        background_color: `#663399`,
+        theme_color: `#663399`,
+        display: `minimal-ui`,
+        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+      },
+    },
+    {
+      resolve: `gatsby-source-stripe`,
+      options: {
+        objects: [`Price`],
+        secretKey: process.env.STRIPE_SK,
+      }
+    },
+    // this (optional) plugin enables Progressive Web App + Offline functionality
+    // To learn more, visit: https://gatsby.dev/offline
+    // `gatsby-plugin-offline`,
+    {
+      resolve: `gatsby-plugin-typography`,
+      options: {
+        pathToConfigModule: 'src/utils/typography.js',
+      }
+    }
+  ],
+}
+
+```
+
+query:
+
+```graphql
+query {
+  allStripePrice {
+    edges {
+      node {
+        id
+        unit_amount
+        product {
+          name
+          metadata {
+            img
+            description
+            wear
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+### Productos en React
+
+Creamos Products.js:
+
+```javascript
+import React from 'react'
+import { Link } from 'gatsby'
+import formatprice from '../utils/priceFormat'
+import { StyledProducts } from '../styles/components'
+
+export default function Products({products}) {
+  return (
+    <StyledProducts>
+      <h2>Productos</h2>
+      <section>
+        {products.edges.map(({node}) => {
+          const price = formatprice(node.unit_amount)
+          return (
+            <article key={node.id}>
+              <img src={node.product.metadata.img} alt={node.product.name}/>
+              <p>{node.product.name}</p>
+              <small>USD {price}</small>
+              <Link to={`/${node.id}`}>
+                Comprar ahora <span>➡</span>
+              </Link>
+            </article>
+          )
+        })}
+      </section>
+    </StyledProducts>
+  )
+}
+
+```
+
+Lo exportamos en index.js de components:
+
+`export { default as Products } from './Products'`
+
+Y en index.js de pages tenemos el nuevo query:
+
+```javascript
+import React from "react"
+import { graphql } from "gatsby"
+import { Jumbo, SEO, Products } from '../components/'
+
+export const query = graphql`
+  query GET_DATA {
+  allSite {
+    edges {
+      node {
+        siteMetadata {
+          description
+        }
+      }
+    }
+  }
+  allStripePrice {
+    edges {
+      node {
+        id
+        unit_amount
+        product {
+          name
+          metadata {
+            img
+            description
+            wear
+          }
+        }
+      }
+    }
+  }
+}
+`
+
+const IndexPage = ({data}) => {
+  return (
+  <>
+    <SEO title="Home" />
+    <Jumbo description={data.allSite.edges[0].node.siteMetadata.description}/>
+    <Products products={data.allStripePrice} />
+  </>
+)}
+
+export default IndexPage
+
+```

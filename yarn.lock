@@ -1814,7 +1814,7 @@
     "@types/node" "*"
     "form-data" "^3.0.0"
 
-"@types/node@*", "@types/node@>=12":
+"@types/node@*", "@types/node@>=12", "@types/node@>=8.1.0":
   "integrity" "sha512-S63Dlv4zIPb8x6MMTgDq5WWRJQe56iBEY0O3SOFA9JrRienkOVDXSXBjjJw6HTNQYSE2JI6GMCR6LVbIMHJVvA=="
   "resolved" "https://registry.npmjs.org/@types/node/-/node-16.7.10.tgz"
   "version" "16.7.10"
@@ -4899,6 +4899,11 @@
   dependencies:
     "is-obj" "^2.0.0"
 
+"dotenv@^10.0.0":
+  "integrity" "sha512-rlBi9d8jpv9Sf1klPjNfFAuWDjKLwTIJJ/VxtoTwIR6hnZxcEOQCZg2oIL3MWBYw5GpUDKOEnND7LXTbIpQ03Q=="
+  "resolved" "https://registry.npmjs.org/dotenv/-/dotenv-10.0.0.tgz"
+  "version" "10.0.0"
+
 "dotenv@^8.2.0":
   "integrity" "sha512-IrPdXQsk2BbzvCBGBOTmmSH5SodmqZNt4ERAZDmW4CT+tL8VtvinqywuANaFu4bOMWki16nqf0e4oC0QIaDr/g=="
   "resolved" "https://registry.npmjs.org/dotenv/-/dotenv-8.6.0.tgz"
@@ -5825,7 +5830,7 @@
   "resolved" "https://registry.npmjs.org/file-type/-/file-type-12.4.2.tgz"
   "version" "12.4.2"
 
-"file-type@^16.0.0":
+"file-type@^16.0.0", "file-type@^16.5.3":
   "integrity" "sha512-uVsl7iFhHSOY4bEONLlTK47iAHtNsFHWP5YE4xJfZ4rnX7S1Q3wce09XgqSC7E/xh8Ncv/be1lNoyprlUH/x6A=="
   "resolved" "https://registry.npmjs.org/file-type/-/file-type-16.5.3.tgz"
   "version" "16.5.3"
@@ -6218,6 +6223,20 @@
     "tmp" "^0.2.1"
     "xdg-basedir" "^4.0.0"
 
+"gatsby-core-utils@^2.0.0":
+  "integrity" "sha512-fkMAxiWFY8N26Iui/Wq8yfE2FY2b31bGJVtlIlSwLgfsoO7fpta64lxeivRtfpNLbAoywmWY/L8TC74GFlnuWg=="
+  "resolved" "https://registry.npmjs.org/gatsby-core-utils/-/gatsby-core-utils-2.13.0.tgz"
+  "version" "2.13.0"
+  dependencies:
+    "ci-info" "2.0.0"
+    "configstore" "^5.0.1"
+    "file-type" "^16.5.3"
+    "fs-extra" "^8.1.0"
+    "node-object-hash" "^2.3.8"
+    "proper-lockfile" "^4.1.2"
+    "tmp" "^0.2.1"
+    "xdg-basedir" "^4.0.0"
+
 "gatsby-graphiql-explorer@^0.11.0":
   "integrity" "sha512-mmxQhQSDUkbtOhQUek9a9sSg6LpiQUytNNR2hec8iklau2D4MDA5CvHTk9GUGhjdUgtnHSe/MPyZVJGmXSnYAA=="
   "resolved" "https://registry.npmjs.org/gatsby-graphiql-explorer/-/gatsby-graphiql-explorer-0.11.0.tgz"
@@ -6333,6 +6352,11 @@
     "sharp" "^0.27.0"
     "svgo" "1.3.2"
     "uuid" "3.4.0"
+
+"gatsby-plugin-stripe@^1.2.4":
+  "integrity" "sha512-g2mj5llTjzIhGQ6fxLLjaTlQWP0ntu62+AnJ2Ff9EDEXm5+5TGrCL4T7Q3on3d0HNK/7gkGPPVVSlRCNOKq4vA=="
+  "resolved" "https://registry.npmjs.org/gatsby-plugin-stripe/-/gatsby-plugin-stripe-1.2.4.tgz"
+  "version" "1.2.4"
 
 "gatsby-plugin-typescript@^2.12.1":
   "integrity" "sha512-p32qJVDi5Xw1Oo5vLMUXdRBxSDlMrfxTGb7etMAsVfyLRlRhMLb2YsuXJIvN1IfybQ6Z3EbhlH293cpxn5jozg=="
@@ -6451,6 +6475,33 @@
     "valid-url" "^1.0.9"
     "xstate" "^4.14.0"
 
+"gatsby-source-filesystem@3.0.0":
+  "integrity" "sha512-t51BSxAqRKO/veY99U/TcsWA7C1MRIokOJHGHoJij1ZLBzvB2GMB7dNQHhAyHa7MWwfzAwd7jI/TJCJX9l0KlQ=="
+  "resolved" "https://registry.npmjs.org/gatsby-source-filesystem/-/gatsby-source-filesystem-3.0.0.tgz"
+  "version" "3.0.0"
+  dependencies:
+    "@babel/runtime" "^7.12.5"
+    "better-queue" "^3.8.10"
+    "chokidar" "^3.4.3"
+    "file-type" "^16.0.0"
+    "fs-extra" "^8.1.0"
+    "gatsby-core-utils" "^2.0.0"
+    "got" "^9.6.0"
+    "md5-file" "^5.0.0"
+    "mime" "^2.4.6"
+    "pretty-bytes" "^5.4.1"
+    "progress" "^2.0.3"
+    "valid-url" "^1.0.9"
+    "xstate" "^4.14.0"
+
+"gatsby-source-stripe@^3.2.2":
+  "integrity" "sha512-RtsG+DM1CDBK0/3GhrawR+UY66UHzB639NhoK+EYOVifMccbINPWTIty342iwzlqx8WOk0H+VUyk1Ogb2jc6WA=="
+  "resolved" "https://registry.npmjs.org/gatsby-source-stripe/-/gatsby-source-stripe-3.2.2.tgz"
+  "version" "3.2.2"
+  dependencies:
+    "gatsby-source-filesystem" "3.0.0"
+    "stripe" "8.137.0"
+
 "gatsby-telemetry@^1.10.2":
   "integrity" "sha512-LwMtRIdcNuI25D+yU7RO+UcmF+3uPz0Zrefa+/rkTmxZuz54bOGSYqmzJJt1L1gRz7Jdl+DmYRqVgmiW/dsr/g=="
   "resolved" "https://registry.npmjs.org/gatsby-telemetry/-/gatsby-telemetry-1.10.2.tgz"
@@ -6484,7 +6535,7 @@
     "semver" "^7.3.4"
     "sharp" "^0.27.0"
 
-"gatsby@^2.0.0", "gatsby@^2.0.100", "gatsby@^2.12.1", "gatsby@^2.2.0", "gatsby@^2.24.79", "gatsby@^2.25.0", "gatsby@^2.8.8", "gatsby@^3.0.0-next.0", "gatsby@>2.0.15":
+"gatsby@^2.0.0", "gatsby@^2.0.100", "gatsby@^2.12.1", "gatsby@^2.2.0", "gatsby@^2.24.79", "gatsby@^2.25.0", "gatsby@^2.8.8", "gatsby@^3.0.0-next.0", "gatsby@>=1", "gatsby@>=2.0.15", "gatsby@>2.0.15":
   "integrity" "sha512-BYfiI/k+t8m/IzSkWZH8Cc0v7rJw6giSjG5sX25LWdfkQMqUvg/Gn6OC8BWwRPXnEwe7x0n5jbH+peO0p34ZHQ=="
   "resolved" "https://registry.npmjs.org/gatsby/-/gatsby-2.32.13.tgz"
   "version" "2.32.13"
@@ -9556,7 +9607,7 @@
     "util" "^0.11.0"
     "vm-browserify" "^1.0.1"
 
-"node-object-hash@^2.0.0":
+"node-object-hash@^2.0.0", "node-object-hash@^2.3.8":
   "integrity" "sha512-NQt1YURrMPeQGZzW4lRbshUEF2PqxJEZYY4XJ/L+q33dI8yPYvnb7QXmwUcl1EuXluzeY4TEV+H6H0EmtI6f5g=="
   "resolved" "https://registry.npmjs.org/node-object-hash/-/node-object-hash-2.3.9.tgz"
   "version" "2.3.9"
@@ -11041,7 +11092,7 @@
     "object-assign" "^4.1.1"
     "react-is" "^16.8.1"
 
-"proper-lockfile@^4.1.1":
+"proper-lockfile@^4.1.1", "proper-lockfile@^4.1.2":
   "integrity" "sha512-TjNPblN4BwAWMXU8s9AEz4JmQxnD1NNL7bNOY/AKUzyamc379FWASUhc/K1pL2noVb+XmZKLL68cjzLsiOAMaA=="
   "resolved" "https://registry.npmjs.org/proper-lockfile/-/proper-lockfile-4.1.2.tgz"
   "version" "4.1.2"
@@ -11142,17 +11193,17 @@
   "resolved" "https://registry.npmjs.org/q/-/q-1.5.1.tgz"
   "version" "1.5.1"
 
+"qs@^6.6.0", "qs@6.7.0":
+  "integrity" "sha512-VCdBRNFTX1fyE7Nb6FYoURo/SPe62QCaAyzJvUjwRaIsc+NePBEniHlvxFmmX56+HZphIGtV0XeCirBtpDrTyQ=="
+  "resolved" "https://registry.npmjs.org/qs/-/qs-6.7.0.tgz"
+  "version" "6.7.0"
+
 "qs@^6.9.4":
   "integrity" "sha512-M528Hph6wsSVOBiYUnGf+K/7w0hNshs/duGsNXPUCLH5XAqjEtiPGwNONLV0tBH8NoGb0mvD5JubnUTrujKDTg=="
   "resolved" "https://registry.npmjs.org/qs/-/qs-6.10.1.tgz"
   "version" "6.10.1"
   dependencies:
     "side-channel" "^1.0.4"
-
-"qs@6.7.0":
-  "integrity" "sha512-VCdBRNFTX1fyE7Nb6FYoURo/SPe62QCaAyzJvUjwRaIsc+NePBEniHlvxFmmX56+HZphIGtV0XeCirBtpDrTyQ=="
-  "resolved" "https://registry.npmjs.org/qs/-/qs-6.7.0.tgz"
-  "version" "6.7.0"
 
 "query-string@^4.1.0":
   "integrity" "sha1-u7aTucqRXCMlFbIosaArYJBD2+s="
@@ -12929,6 +12980,14 @@
   "version" "1.0.1"
   dependencies:
     "escape-string-regexp" "^1.0.2"
+
+"stripe@8.137.0":
+  "integrity" "sha512-UlxXjff6O+0hGY7DRZZnepZegXfi8KoYKuW4fgMlNIiyvKR/G8EjL13uaqFI31vmVm0WxNvjrBiHd9DFX9rLgA=="
+  "resolved" "https://registry.npmjs.org/stripe/-/stripe-8.137.0.tgz"
+  "version" "8.137.0"
+  dependencies:
+    "@types/node" ">=8.1.0"
+    "qs" "^6.6.0"
 
 "strtok3@^6.2.4":
   "integrity" "sha512-GO8IcFF9GmFDvqduIspUBwCzCbqzegyVKIsSymcMgiZKeCfrN9SowtUoi8+b59WZMAjIzVZic/Ft97+pynR3Iw=="
